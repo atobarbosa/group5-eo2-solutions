@@ -1,0 +1,32 @@
+def navigate_file_lines():
+    try:
+        filename = input("Enter the filename: ")
+        file = open(filename, 'r')
+        lines = file.readlines()
+        file.close()
+
+        while True:
+            print("The file has", len(lines), "lines.")
+            line_number = input("Enter a line number (or 0 to quit): ")
+
+            if not line_number.isdigit():
+                print("Invalid input. Try again.")
+                continue
+
+            line_number = int(line_number)
+
+            if line_number == 0:
+                print("Exiting program. Goodbye!")
+                break
+
+            if 1 <= line_number <= len(lines):
+                print("Line", line_number, ":", lines[line_number - 1].strip())
+            else:
+                print("Line number out of range. Try again.")
+
+    except FileNotFoundError:
+        print("Error: File not found.")
+    except Exception as e:
+        print("An unexpected error occurred:", e)
+
+navigate_file_lines()
